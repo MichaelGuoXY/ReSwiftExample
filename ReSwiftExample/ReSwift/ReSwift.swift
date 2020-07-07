@@ -79,10 +79,40 @@ class MainStore {
     private let store = Store(reducer: appReducer, state: nil, middleware: [countMiddleware])
     
     private let dispatchQueue = DispatchQueue(label: "MainStore serial queue")
+    private let dispatchMainQueue = DispatchQueue.main
     
     func dispatch(_ action: Action) {
-        dispatchQueue.async { [unowned self] in
+        // Using dispatchQueue or dispatchMainQueue
+        // unexpected output:
+        /*
+         warmup
+         Warmup-ing ...
+         warmup
+         Warmup-ing ...
+         warmup
+         Warmup-ing ...
+         doneWarmup
+         Done warmup ...
+         doneWarmup
+         Done warmup ...
+         doneWarmup
+         Done warmup ...
+         */
+        
+        // While not using queue
+        // expected output:
+        /*
+         warmup
+         Warmup-ing ...
+         doneWarmup
+         Done warmup ...
+         warmup
+         warmup
+         */
+        
+        
+//        dispatchMainQueue.async { [unowned self] in
             self.store.dispatch(action)
-        }
+//        }
     }
 }

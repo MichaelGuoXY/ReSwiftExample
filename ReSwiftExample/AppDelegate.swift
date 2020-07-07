@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainStore.dispatch(AppAction.warmup)
         mainStore.dispatch(AppAction.warmup)
         mainStore.dispatch(AppAction.warmup)
-        mainStore.dispatch(AppAction.warmup)
-        mainStore.dispatch(AppAction.warmup)
-        mainStore.dispatch(AppAction.warmup)
         
         return true
     }
